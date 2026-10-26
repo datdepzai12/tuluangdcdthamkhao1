@@ -1,239 +1,712 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giải bài tập Tự luận (Rút gọn) - Giáo dục Công dân</title>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #1a73e8;
-            --primary-dark: #0d47a1;
-            --bg: #f0f4f8;
-            --card: #ffffff;
-            --text: #1e293b;
-            --text-light: #64748b;
-            --border: #e2e8f0;
-            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ứng dụng Ôn tập Lịch sử & Địa lý - 8 Câu Tự Luận</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Chart.js DataLabels Plugin CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af',
+            }
+          }
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Be Vietnam Pro', system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.65;
-            padding: 20px;
-        }
-        .container { max-width: 880px; margin: 0 auto; }
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 32px 24px;
-            border-radius: 18px;
-            margin-bottom: 24px;
-            text-align: center;
-            box-shadow: var(--shadow);
-        }
-        header h1 { font-size: 1.7rem; font-weight: 700; margin-bottom: 6px; }
-        header p { opacity: 0.9; font-size: 1rem; }
-        .nav {
-            display: flex; flex-wrap: wrap; gap: 8px;
-            justify-content: center; margin-bottom: 24px;
-        }
-        .nav a {
-            background: white; color: var(--primary);
-            padding: 8px 16px; border-radius: 50px;
-            text-decoration: none; font-weight: 500; font-size: 0.9rem;
-            box-shadow: var(--shadow); transition: all 0.2s;
-        }
-        .nav a:hover { background: var(--primary); color: white; }
-        .question-card {
-            background: var(--card);
-            border-radius: 14px;
-            padding: 22px 24px;
-            margin-bottom: 22px;
-            box-shadow: var(--shadow);
-            border-left: 5px solid var(--primary);
-        }
-        .question-card h2 {
-            color: var(--primary-dark);
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-            display: flex; align-items: center; gap: 8px;
-        }
-        .badge {
-            display: inline-block;
-            background: var(--primary); color: white;
-            font-size: 0.75rem; padding: 2px 9px;
-            border-radius: 20px; font-weight: 600;
-        }
-        .de-bai {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 14px 16px;
-            margin-bottom: 16px;
-            border: 1px solid var(--border);
-            font-size: 0.97rem;
-        }
-        .answer {
-            background: #f0fdf4;
-            border-radius: 10px;
-            padding: 16px 18px;
-            border: 1px solid #bbf7d0;
-        }
-        .answer h3 {
-            color: #15803d;
-            font-size: 1.05rem;
-            margin-bottom: 10px;
-        }
-        .answer p, .answer li { margin-bottom: 8px; font-size: 0.98rem; }
-        .answer ul { padding-left: 20px; margin-bottom: 8px; }
-        .key {
-            background: #fef9c3;
-            border-left: 4px solid #eab308;
-            padding: 10px 14px;
-            border-radius: 0 8px 8px 0;
-            margin-top: 12px;
-            font-size: 0.93rem;
-            color: #854d0e;
-            font-weight: 500;
-        }
-        footer {
-            text-align: center;
-            padding: 24px 0;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-        @media (max-width: 600px) {
-            header { padding: 24px 16px; }
-            header h1 { font-size: 1.4rem; }
-            .question-card { padding: 16px; }
-        }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    /* Smooth transitions */
+    .tab-btn {
+      transition: all 0.2s ease-in-out;
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    /* Flashcard 3D perspective */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+  </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>📘 Giải Tự luận (Rút gọn)</h1>
-            <p>Dễ học thuộc – Vẫn đủ ý để đi thi</p>
-        </header>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col md:flex-row">
 
-        <nav class="nav">
-            <a href="#cau1">Câu 1</a>
-            <a href="#cau2">Câu 2</a>
-            <a href="#cau3">Câu 3</a>
-            <a href="#cau4">Câu 4</a>
-            <a href="#cau5">Câu 5</a>
-        </nav>
-
-        <!-- CÂU 1 -->
-        <section id="cau1" class="question-card">
-            <h2><span class="badge">Câu 1</span> Tuổi ăn chơi & học tập</h2>
-            <div class="de-bai">
-                Học sinh THCS đang ở tuổi ăn, tuổi chơi thì nên biết tranh thủ ăn chơi, hưởng thụ. Còn việc học hành, làm việc, cống hiến là việc làm suốt đời.<br>
-                <em>Em có tán thành quan điểm trên không? Vì sao?</em>
-            </div>
-            <div class="answer">
-                <h3>✅ Bài làm ngắn</h3>
-                <p><strong>Em không tán thành quan điểm trên.</strong></p>
-                <ul>
-                    <li>Học sinh THCS đang ở độ tuổi vàng để học tập, rèn luyện tri thức và nhân cách.</li>
-                    <li>Nếu chỉ tranh thủ ăn chơi sẽ dễ lười học, ảnh hưởng đến tương lai.</li>
-                    <li>Học hành, rèn luyện phải được thực hiện ngay từ khi còn ngồi trên ghế nhà trường, không thể chờ đến khi trưởng thành.</li>
-                </ul>
-                <p>→ Cần cân bằng giữa học và chơi lành mạnh, lấy học tập làm nhiệm vụ chính.</p>
-                <div class="key">🔑 Ý chính: Không tán thành – Tuổi học là tuổi vàng – Phải học ngay từ bây giờ.</div>
-            </div>
-        </section>
-
-        <!-- CÂU 2 -->
-        <section id="cau2" class="question-card">
-            <h2><span class="badge">Câu 2</span> Nhân ái & ích kỷ</h2>
-            <div class="de-bai">
-                Có ý kiến cho rằng, hiện nay bên cạnh những học sinh, thanh niên có tấm lòng nhân ái thì vẫn còn những cá nhân sống ích kỷ, ham chơi, chỉ biết hưởng thụ, thờ ơ với cộng đồng.<br>
-                <strong>a.</strong> Nêu quan điểm của em.<br>
-                <strong>b.</strong> Lấy ví dụ chứng minh.
-            </div>
-            <div class="answer">
-                <h3>✅ Bài làm ngắn</h3>
-                <p><strong>a.</strong> Em <strong>tán thành</strong> ý kiến trên vì nó phản ánh đúng thực tế xã hội. Bên cạnh nhiều bạn trẻ tốt vẫn còn một số người sống ích kỷ, thiếu trách nhiệm.</p>
-                <p><strong>b. Ví dụ:</strong></p>
-                <ul>
-                    <li><strong>Tích cực:</strong> Nhiều học sinh tham gia tình nguyện, quyên góp ủng hộ đồng bào bị thiên tai.</li>
-                    <li><strong>Tiêu cực:</strong> Một số bạn chỉ chơi game, xả rác bừa bãi, thờ ơ khi thấy người cần giúp đỡ.</li>
-                </ul>
-                <div class="key">🔑 Ý chính: Tán thành – Có cả tốt lẫn xấu – Ví dụ rõ ràng 1 tích cực + 1 tiêu cực.</div>
-            </div>
-        </section>
-
-        <!-- CÂU 3 -->
-        <section id="cau3" class="question-card">
-            <h2><span class="badge">Câu 3</span> Bạn A day dứt với ông nội</h2>
-            <div class="de-bai">
-                A day dứt vì đã mắc lỗi với ông nội. Ông mất, A càng ân hận, thường xuyên khóc, mất ngủ, buồn rầu, không muốn nói chuyện với mọi người.<br>
-                <strong>a.</strong> Nhận xét về hành động của A.<br>
-                <strong>b.</strong> Nếu là bạn của A, em sẽ khuyên gì?
-            </div>
-            <div class="answer">
-                <h3>✅ Bài làm ngắn</h3>
-                <p><strong>a.</strong> A biết nhận lỗi và biết trân trọng ông nội là điều tốt. Tuy nhiên, A để nỗi day dứt ảnh hưởng quá mức đến sức khỏe và tinh thần là không nên.</p>
-                <p><strong>b. Khuyên A:</strong></p>
-                <ul>
-                    <li>Chấp nhận sai lầm và rút kinh nghiệm.</li>
-                    <li>Chuyển nỗi day dứt thành động lực sống tốt hơn, học giỏi hơn để tưởng nhớ ông.</li>
-                    <li>Tâm sự với bố mẹ, bạn bè để được chia sẻ.</li>
-                </ul>
-                <div class="key">🔑 Ý chính: Biết nhận lỗi là tốt – Không nên day dứt quá mức – Sống tốt hơn chính là cách xin lỗi.</div>
-            </div>
-        </section>
-
-        <!-- CÂU 4 -->
-        <section id="cau4" class="question-card">
-            <h2><span class="badge">Câu 4</span> Bạn V quên việc nhà</h2>
-            <div class="de-bai">
-                Bố mẹ giao V dọn nhà mỗi ngày nhưng V thường mải chơi quên. Một lần có khách, V thấy bố mẹ rất ngượng vì nhà bừa bộn.<br>
-                <em>Nếu em là bố mẹ của V, em sẽ ứng xử thế nào?</em>
-            </div>
-            <div class="answer">
-                <h3>✅ Bài làm ngắn</h3>
-                <ul>
-                    <li>Không mắng trước mặt khách.</li>
-                    <li>Sau khi khách về, nói chuyện nhẹ nhàng, chỉ ra hậu quả (bố mẹ bị ngượng).</li>
-                    <li>Giải thích việc nhà là trách nhiệm chung của mọi thành viên.</li>
-                    <li>Cùng V lập thời gian biểu rõ ràng và động viên, khen ngợi khi V làm tốt.</li>
-                </ul>
-                <div class="key">🔑 Ý chính: Bình tĩnh – Chỉ rõ hậu quả – Giao việc có kế hoạch – Khen khi làm tốt.</div>
-            </div>
-        </section>
-
-        <!-- CÂU 5 -->
-        <section id="cau5" class="question-card">
-            <h2><span class="badge">Câu 5</span> Đồng ý / Không đồng ý quan điểm</h2>
-            <div class="de-bai">
-                Em đồng ý quan điểm nào và không đồng ý quan điểm nào? Vì sao?<br><br>
-                <strong>A.</strong> Khi có nhiều cá nhân tham gia hoạt động chung thì đó là hoạt động cộng đồng.<br>
-                <strong>B.</strong> Tích cực tham gia hoạt động cộng đồng giúp hoàn thiện bản thân và lan tỏa giá trị tốt đẹp.<br>
-                <strong>C.</strong> Chỉ những người có điều kiện kinh tế mới tham gia được hoạt động cộng đồng.<br>
-                <strong>D.</strong> Học sinh không chỉ tích cực tham gia mà còn cần động viên người thân, bạn bè cùng tham gia.
-            </div>
-            <div class="answer">
-                <h3>✅ Bài làm ngắn</h3>
-                <p><strong>Đồng ý: B và D</strong><br>
-                <strong>Không đồng ý: A và C</strong></p>
-                <ul>
-                    <li><strong>A – Sai:</strong> Không phải cứ đông người là hoạt động cộng đồng. Phải có mục đích vì lợi ích chung.</li>
-                    <li><strong>B – Đúng:</strong> Tham gia giúp rèn luyện bản thân và lan tỏa điều tốt.</li>
-                    <li><strong>C – Sai:</strong> Ai cũng có thể tham gia (nhặt rác, giúp đỡ người khác…), không cần điều kiện kinh tế.</li>
-                    <li><strong>D – Đúng:</strong> Cần lan tỏa tinh thần tích cực đến mọi người xung quanh.</li>
-                </ul>
-                <div class="key">🔑 Ý chính: Đồng ý B, D – Không đồng ý A, C. Nhớ lý do ngắn gọn.</div>
-            </div>
-        </section>
-
-        <footer>
-            <p>Phiên bản rút gọn – Dễ học thuộc để đi thi</p>
-            <p style="margin-top:4px; font-size:0.85rem;">Vẫn đủ ý, chỉ cần diễn đạt lại bằng lời của mình là được.</p>
-        </footer>
+  <!-- Mobile Header Bar -->
+  <div class="md:hidden bg-slate-900 text-white p-4 flex items-center justify-between border-b border-slate-800 sticky top-0 z-50">
+    <div class="flex items-center gap-2">
+      <i class="fa-solid me-2 fa-book-bookmark text-blue-400"></i>
+      <span class="font-bold text-lg">Ôn Tập Lịch Sử - Địa Lý</span>
     </div>
+    <button id="mobileMenuBtn" class="p-2 rounded hover:bg-slate-800 text-slate-300">
+      <i class="fa-solid fa-bars text-xl"></i>
+    </button>
+  </div>
+
+  <!-- Sidebar Navigation -->
+  <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-40 w-72 bg-slate-900 text-slate-300 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col justify-between border-r border-slate-800">
+    <div class="p-4">
+      <div class="hidden md:flex items-center gap-3 px-3 py-2 mb-6 border-b border-slate-800">
+        <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-md">
+          <i class="fa-solid fa-graduation-cap text-lg"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-white text-base leading-tight">Ôn Tập Tự Luận</h1>
+          <p class="text-xs text-slate-400">Lịch Sử & Địa Lý 2024</p>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 px-3 mb-2">Danh sách câu hỏi</p>
+        <nav class="space-y-1" id="questionNavList">
+          <!-- Populated by JS -->
+        </nav>
+      </div>
+    </div>
+
+    <!-- Quick info footer -->
+    <div class="p-4 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between">
+      <span>8 CÂU TỰ LUẬN CHUẨN</span>
+      <span class="bg-blue-900/60 text-blue-300 px-2 py-0.5 rounded text-[10px] font-semibold">100% Nội dung</span>
+    </div>
+  </aside>
+
+  <!-- Overlay for Mobile Sidebar -->
+  <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
+    
+    <!-- Top Navigation & Mode Selector Header -->
+    <header class="bg-white border-b border-slate-200 px-4 py-3 md:px-8 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-20 shadow-xs">
+      <div>
+        <div class="flex items-center gap-2 text-xs font-medium text-slate-500">
+          <span id="currentQuestionTag">Câu 1</span>
+          <span>&bull;</span>
+          <span id="currentSubjectTag" class="text-blue-600 font-semibold">Lịch Sử</span>
+        </div>
+        <h2 id="questionHeaderTitle" class="text-lg md:text-xl font-bold text-slate-900 truncate">Môn Lịch Sử & Địa Lý</h2>
+      </div>
+
+      <!-- Mode Switcher Tabs -->
+      <div class="flex bg-slate-100 p-1 rounded-xl gap-1 border border-slate-200">
+        <button onclick="switchMode('study')" id="tabStudy" class="tab-btn px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium flex items-center gap-1.5 bg-white text-blue-600 shadow-xs">
+          <i class="fa-solid fa-book-open"></i>
+          <span>Ôn Tập</span>
+        </button>
+        <button onclick="switchMode('practice')" id="tabPractice" class="tab-btn px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
+          <i class="fa-solid fa-keyboard"></i>
+          <span>Tự Kiểm Tra</span>
+        </button>
+        <button onclick="switchMode('flashcard')" id="tabFlashcard" class="tab-btn px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>Flashcard</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Content Workspace -->
+    <div class="flex-1 p-4 md:p-8 max-w-5xl mx-auto w-full">
+
+      <!-- MODE 1: STUDY MODE -->
+      <div id="studyMode" class="space-y-6">
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+          <div class="flex items-start gap-3 mb-4">
+            <span class="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-lg text-sm shrink-0 mt-0.5" id="studyQNum">Câu 1</span>
+            <h3 class="text-lg md:text-xl font-bold text-slate-900 leading-snug" id="studyQTitle">Nội dung câu hỏi</h3>
+          </div>
+
+          <hr class="border-slate-100 my-4">
+
+          <!-- Content view: List or Chart -->
+          <div id="studyAnswerContainer" class="space-y-3">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- MODE 2: PRACTICE / TYPING TEST MODE -->
+      <div id="practiceMode" class="hidden space-y-6">
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+          <div class="flex justify-between items-center mb-4">
+            <span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-lg text-sm" id="practiceQNum">Câu 1</span>
+            <button onclick="checkPracticeAnswer()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2 rounded-xl text-sm transition flex items-center gap-2">
+              <i class="fa-solid fa-check"></i> Kiểm Tra Đáp Án
+            </button>
+          </div>
+          <h3 class="text-base md:text-lg font-semibold text-slate-800 mb-4" id="practiceQTitle">Câu hỏi kiểm tra</h3>
+
+          <textarea id="practiceInput" rows="7" class="w-full p-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition text-sm md:text-base" placeholder="Gõ câu trả lời của bạn vào đây để tự kiểm tra kiến thức..."></textarea>
+
+          <div id="practiceResult" class="hidden mt-6 pt-6 border-t border-slate-200 space-y-4">
+            <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wide flex items-center gap-2">
+              <i class="fa-solid fa-bullseye text-emerald-600"></i> Đáp Án Chuẩn Để So Sánh:
+            </h4>
+            <div id="practiceStandardAnswer" class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-sm space-y-2">
+              <!-- Rendered standard answer -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODE 3: FLASHCARD MODE -->
+      <div id="flashcardMode" class="hidden flex flex-col items-center justify-center min-h-[420px]">
+        <div class="w-full max-w-xl perspective-1000">
+          <div id="flashcard" onclick="flipCard()" class="relative w-full h-80 bg-white rounded-2xl shadow-md border border-slate-200 cursor-pointer transform-style-3d duration-500">
+            <!-- Front -->
+            <div class="absolute inset-0 p-8 flex flex-col justify-between bg-gradient-to-br from-white to-blue-50/40 rounded-2xl backface-hidden">
+              <div class="flex justify-between items-center">
+                <span class="bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded-full" id="fcNum">Câu 1</span>
+                <span class="text-xs text-slate-400 font-medium flex items-center gap-1">
+                  <i class="fa-solid fa-hand-pointer"></i> Bấm để lật thẻ
+                </span>
+              </div>
+              <div class="text-center my-auto px-2">
+                <p class="text-xs text-blue-600 font-semibold uppercase tracking-wider mb-2">Mặt Câu Hỏi</p>
+                <h3 class="text-lg md:text-xl font-bold text-slate-900 leading-snug" id="fcQuestion">Nội dung câu hỏi</h3>
+              </div>
+              <div class="text-center text-xs text-slate-400">1 / 8</div>
+            </div>
+
+            <!-- Back -->
+            <div class="absolute inset-0 p-6 flex flex-col justify-between bg-slate-900 text-white rounded-2xl backface-hidden rotate-y-180 overflow-y-auto">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Mặt Đáp Án</span>
+                <span class="text-xs text-slate-400">Chạm để quay lại</span>
+              </div>
+              <div id="fcAnswer" class="my-auto text-sm text-slate-200 leading-relaxed space-y-2">
+                <!-- Answer content -->
+              </div>
+              <div class="text-center text-xs text-slate-500 pt-2">Lật câu tiếp theo bên dưới</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flashcard Controls -->
+        <div class="flex items-center gap-4 mt-8">
+          <button onclick="prevQuestion()" class="p-3 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 shadow-xs transition">
+            <i class="fa-solid fa-arrow-left text-lg"></i>
+          </button>
+          <button onclick="flipCard()" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-sm shadow-md transition flex items-center gap-2">
+            <i class="fa-solid fa-rotate"></i> Lật Thẻ
+          </button>
+          <button onclick="nextQuestion()" class="p-3 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 shadow-xs transition">
+            <i class="fa-solid fa-arrow-right text-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Nav Buttons for Bottom -->
+      <div id="bottomNav" class="mt-8 flex justify-between items-center border-t border-slate-200 pt-6">
+        <button onclick="prevQuestion()" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-blue-600">
+          <i class="fa-solid fa-chevron-left"></i> Câu Trước
+        </button>
+        <span class="text-xs text-slate-400 font-medium" id="pageIndicator">1 / 8</span>
+        <button onclick="nextQuestion()" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-blue-600">
+          Câu Tiếp <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // Register Chart.js DataLabels plugin globally
+    Chart.register(ChartDataLabels);
+
+    // Database containing all 8 questions and answers exactly matching slide images
+    const questionsData = [
+      {
+        id: 1,
+        subject: "Lịch Sử",
+        title: "Câu 1. Phân tích tác dụng Chính sách mới của Tổng thống Ru-dơ-ven đối với tình hình kinh tế, chính trị và xã hội nước Mỹ.",
+        type: "list",
+        items: [
+          "Giúp phục hồi sự phát triển của các ngành kinh tế - tài chính, cải tổ hệ thống ngân hàng.",
+          "Giải quyết nạn thất nghiệp, tạo thêm nhiều việc làm mới và ổn định tình hình xã hội.",
+          "Cứu nguy cho chủ nghĩa tư bản Mỹ, góp phần duy trì chế độ dân chủ tư sản.",
+          "Chính sách mới đã giúp nước Mỹ từng bước thoát khỏi cuộc khủng hoảng kinh tế."
+        ]
+      },
+      {
+        id: 2,
+        subject: "Lịch Sử",
+        title: "Câu 2. a) Phân tích những nguyên nhân chủ yếu dẫn đến sự phát triển kinh tế Mỹ trong những năm 1920.\nb) Từ sự phát triển kinh tế Mỹ trong những năm 1920, em hãy rút ra bài học đối với việc phát triển kinh tế Việt Nam hiện nay.",
+        type: "subsections",
+        subsections: [
+          {
+            label: "a)",
+            items: [
+              "Mỹ có điều kiện thuận lợi sau Chiến tranh thế giới thứ nhất, thu được nhiều lợi nhuận trong chiến tranh.",
+              "Áp dụng thành tựu khoa học - kỹ thuật, cải tiến phương thức sản xuất, tăng năng suất lao động."
+            ]
+          },
+          {
+            label: "b)",
+            items: [
+              "Đẩy mạnh ứng dụng khoa học - công nghệ, nâng cao năng suất và chất lượng sản phẩm.",
+              "Phát triển kinh tế bền vững, đảm bảo an sinh xã hội, tăng cường và kiểm soát các nguy cơ khủng hoảng."
+            ]
+          }
+        ]
+      },
+      {
+        id: 3,
+        subject: "Lịch Sử",
+        title: "Câu 3. Đánh giá vai trò của Nguyễn Ái Quốc đối với quá trình thành lập Đảng Cộng sản Việt Nam.",
+        type: "list",
+        items: [
+          "Chuẩn bị những điều kiện về chính trị, tư tưởng và tổ chức cho sự ra đời của Đảng Cộng sản Việt Nam.",
+          "Chủ trì hội nghị hợp nhất các tổ chức cộng sản thành Đảng Cộng sản Việt Nam và soạn thảo Cương lĩnh chính trị đầu tiên của Đảng."
+        ]
+      },
+      {
+        id: 4,
+        subject: "Lịch Sử",
+        title: "Câu 4. Qua những hoạt động của Nguyễn Ái Quốc trong giai đoạn 1918-1930, em hãy phân tích vai trò của Người đối với cách mạng Việt Nam.",
+        type: "list",
+        items: [
+          "Tìm ra con đường cứu nước đúng đắn cho dân tộc Việt Nam, truyền bá chủ nghĩa Mác - Lênin vào Việt Nam.",
+          "Chuẩn bị về tư tưởng, chính trị và tổ chức cho sự thành lập Đảng Cộng sản Việt Nam, trực tiếp chủ trì Hội nghị thành lập Đảng đầu năm 1930."
+        ]
+      },
+      {
+        id: 5,
+        subject: "Địa Lý",
+        title: "Câu 5. DIỆN TÍCH GIEO TRỒNG CÂY LƯƠNG THỰC CÓ HẠT VÀ LÚA CỦA NƯỚC TA GIAI ĐOẠN 2010-2024",
+        type: "chart-stacked",
+        unit: "Triệu ha",
+        labels: ["2010", "2015", "2020", "2024"],
+        datasets: [
+          {
+            label: "Lúa",
+            data: [7.5, 7.8, 7.3, 7.1],
+            backgroundColor: "#2563eb" // Blue
+          },
+          {
+            label: "Cây lương thực khác",
+            data: [1.1, 1.2, 0.9, 0.9],
+            backgroundColor: "#d97706" // Amber / Orange-brown
+          }
+        ],
+        totals: [8.6, 9.0, 8.2, 8.0]
+      },
+      {
+        id: 6,
+        subject: "Địa Lý",
+        title: "Câu 6. Theo em cần phải thực hiện những biện pháp nào để nâng cao năng suất, chất lượng và hiệu quả kinh tế cho việc trồng lúa tại địa phương.",
+        type: "list",
+        items: [
+          "Đẩy mạnh cơ giới hóa và ứng dụng nông nghiệp số vào sản xuất nông nghiệp.",
+          "Lựa chọn những giống lúa mới có chất lượng cao và khả năng chịu mặn, chịu hạn, chống chịu sâu bệnh tốt.",
+          "Liên kết chuỗi giá trị và xây dựng thương hiệu.",
+          "Áp dụng kỹ thuật canh tác \"xanh\" và phát thải thấp."
+        ]
+      },
+      {
+        id: 7,
+        subject: "Địa Lý",
+        title: "Câu 7. TỈ LỆ THẤT NGHIỆP VÀ THIẾU VIỆC LÀM TRONG ĐỘ TUỔI LAO ĐỘNG CỦA NƯỚC TA, GIAI ĐOẠN 2010-2024",
+        type: "chart-grouped",
+        unit: "%",
+        labels: ["2010", "2015", "2020", "2024"],
+        datasets: [
+          {
+            label: "Thất nghiệp",
+            data: [2.88, 2.33, 2.48, 2.24],
+            backgroundColor: "#2563eb" // Blue
+          },
+          {
+            label: "Thiếu việc làm",
+            data: [3.57, 1.89, 2.52, 1.85],
+            backgroundColor: "#d97706" // Amber / Gold
+          }
+        ]
+      },
+      {
+        id: 8,
+        subject: "Địa Lý",
+        title: "Câu 8. Trình bày những giải pháp để giải quyết vấn đề việc làm ở địa phương.",
+        type: "list",
+        items: [
+          "Thúc đẩy tạo việc làm mới thông qua đẩy mạnh phát triển các ngành kinh tế.",
+          "Phát triển hệ thống tư vấn, thông tin về thị trường lao động, việc làm.",
+          "Hoàn thiện chính sách, pháp luật về lao động nhằm khuyến khích, hỗ trợ, huy động mọi nguồn lực đầu tư tạo việc làm.",
+          "Đẩy mạnh hợp tác quốc tế về lao động.",
+          "Đào tạo nghề và nâng cao chất lượng nguồn lao động.",
+          "Hỗ trợ vốn và khuyến khích khởi nghiệp, tự tạo việc làm."
+        ]
+      }
+    ];
+
+    let currentIndex = 0;
+    let currentMode = 'study';
+    let currentChartInstance = null;
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    function toggleMobileMenu() {
+      sidebar.classList.toggle('-translate-x-full');
+      sidebarOverlay.classList.toggle('hidden');
+    }
+
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    sidebarOverlay.addEventListener('click', toggleMobileMenu);
+
+    // Render Navigation Links
+    function renderNav() {
+      const nav = document.getElementById('questionNavList');
+      nav.innerHTML = questionsData.map((q, idx) => `
+        <button onclick="selectQuestion(${idx})" class="w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition flex items-center justify-between ${idx === currentIndex ? 'bg-blue-600 text-white font-semibold' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'}">
+          <span class="truncate">Câu ${q.id}: ${q.subject}</span>
+          <i class="fa-solid fa-chevron-right text-xs opacity-60"></i>
+        </button>
+      `).join('');
+    }
+
+    function selectQuestion(index) {
+      currentIndex = index;
+      if (!sidebar.classList.contains('-translate-x-full')) {
+        toggleMobileMenu();
+      }
+      renderCurrentQuestion();
+      renderNav();
+    }
+
+    function switchMode(mode) {
+      currentMode = mode;
+      
+      // Update Tab Styles
+      ['study', 'practice', 'flashcard'].forEach(m => {
+        const btn = document.getElementById(`tab${m.charAt(0).toUpperCase() + m.slice(1)}`);
+        if (m === mode) {
+          btn.className = "tab-btn px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium flex items-center gap-1.5 bg-white text-blue-600 shadow-xs font-semibold";
+        } else {
+          btn.className = "tab-btn px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium flex items-center gap-1.5 text-slate-600 hover:text-slate-900";
+        }
+      });
+
+      // Show/Hide Containers
+      document.getElementById('studyMode').classList.toggle('hidden', mode !== 'study');
+      document.getElementById('practiceMode').classList.toggle('hidden', mode !== 'practice');
+      document.getElementById('flashcardMode').classList.toggle('hidden', mode !== 'flashcard');
+      document.getElementById('bottomNav').classList.toggle('hidden', mode === 'flashcard');
+
+      renderCurrentQuestion();
+    }
+
+    function renderCurrentQuestion() {
+      const q = questionsData[currentIndex];
+
+      // Top Tags & Titles
+      document.getElementById('currentQuestionTag').innerText = `Câu ${q.id}`;
+      document.getElementById('currentSubjectTag').innerText = q.subject;
+      document.getElementById('currentSubjectTag').className = q.subject === 'Lịch Sử' ? 'text-blue-600 font-semibold' : 'text-emerald-600 font-semibold';
+      document.getElementById('questionHeaderTitle').innerText = q.title.split('\n')[0];
+      document.getElementById('pageIndicator').innerText = `${q.id} / ${questionsData.length}`;
+
+      if (currentMode === 'study') {
+        renderStudyMode(q);
+      } else if (currentMode === 'practice') {
+        renderPracticeMode(q);
+      } else if (currentMode === 'flashcard') {
+        renderFlashcardMode(q);
+      }
+    }
+
+    function renderStudyMode(q) {
+      document.getElementById('studyQNum').innerText = `Câu ${q.id}`;
+      document.getElementById('studyQTitle').innerText = q.title;
+
+      const container = document.getElementById('studyAnswerContainer');
+      container.innerHTML = '';
+
+      if (q.type === 'list') {
+        container.innerHTML = `
+          <ul class="space-y-3">
+            ${q.items.map(item => `
+              <li class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                <i class="fa-solid fa-circle-dot text-blue-500 text-xs mt-1 shrink-0"></i>
+                <span class="text-slate-700 leading-relaxed font-medium text-sm md:text-base">${item}</span>
+              </li>
+            `).join('')}
+          </ul>
+        `;
+      } else if (q.type === 'subsections') {
+        container.innerHTML = q.subsections.map(sub => `
+          <div class="mb-4">
+            <h4 class="font-bold text-blue-700 text-base mb-2">${sub.label}</h4>
+            <ul class="space-y-2.5">
+              ${sub.items.map(item => `
+                <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                  <i class="fa-solid fa-check text-blue-500 text-xs mt-1 shrink-0"></i>
+                  <span class="text-slate-700 leading-relaxed text-sm md:text-base">${item}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `).join('');
+      } else if (q.type === 'chart-stacked' || q.type === 'chart-grouped') {
+        container.innerHTML = `
+          <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200">
+            <p class="text-xs text-slate-500 font-semibold mb-2">Đơn vị: ${q.unit}</p>
+            <div class="relative w-full h-80 md:h-96">
+              <canvas id="mainChartCanvas"></canvas>
+            </div>
+          </div>
+        `;
+        setTimeout(() => createChart(q), 50);
+      }
+    }
+
+    function createChart(q) {
+      if (currentChartInstance) {
+        currentChartInstance.destroy();
+      }
+
+      const ctx = document.getElementById('mainChartCanvas').getContext('2d');
+
+      if (q.type === 'chart-stacked') {
+        // Stacked Bar Chart with Segment DataLabels & Top Total Labels
+        currentChartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: q.labels,
+            datasets: q.datasets
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+              padding: {
+                top: 25 // Extra padding for total numbers on top
+              }
+            },
+            scales: {
+              x: {
+                stacked: true,
+                grid: { display: false },
+                ticks: { font: { family: 'Inter', weight: 'bold' } }
+              },
+              y: {
+                stacked: true,
+                max: 10,
+                grid: { color: '#f1f5f9' },
+                ticks: { font: { family: 'Inter' } }
+              }
+            },
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: { font: { family: 'Inter', size: 12, weight: '500' } }
+              },
+              tooltip: { enabled: true },
+              datalabels: {
+                display: true,
+                color: '#ffffff',
+                font: { family: 'Inter', weight: 'bold', size: 12 },
+                formatter: (value) => value.toFixed(1)
+              }
+            }
+          },
+          plugins: [{
+            // Custom Plugin to Draw Total Values on Top of Stacked Bars
+            id: 'stackedTotals',
+            afterDatasetsDraw(chart) {
+              const { ctx } = chart;
+              chart.data.labels.forEach((label, index) => {
+                const total = q.totals[index];
+                const meta = chart.getDatasetMeta(q.datasets.length - 1, index);
+                const bar = meta.data[index];
+                if (bar) {
+                  ctx.save();
+                  ctx.font = 'bold 13px Inter';
+                  ctx.fillStyle = '#1e293b';
+                  ctx.textAlign = 'center';
+                  ctx.fillText(total.toFixed(1), bar.x, bar.y - 8);
+                  ctx.restore();
+                }
+              });
+            }
+          }]
+        });
+      } else if (q.type === 'chart-grouped') {
+        // Grouped Bar Chart with Direct Values on Top
+        currentChartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: q.labels,
+            datasets: q.datasets
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+              padding: {
+                top: 25
+              }
+            },
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: { font: { family: 'Inter', weight: 'bold' } }
+              },
+              y: {
+                max: 4.5,
+                grid: { color: '#f1f5f9' },
+                ticks: { font: { family: 'Inter' } }
+              }
+            },
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: { font: { family: 'Inter', size: 12, weight: '500' } }
+              },
+              datalabels: {
+                anchor: 'end',
+                align: 'top',
+                color: '#1e293b',
+                font: { family: 'Inter', weight: 'bold', size: 11 },
+                formatter: (value) => value.toFixed(2)
+              }
+            }
+          }
+        });
+      }
+    }
+
+    function renderPracticeMode(q) {
+      document.getElementById('practiceQNum').innerText = `Câu ${q.id}`;
+      document.getElementById('practiceQTitle').innerText = q.title;
+      document.getElementById('practiceInput').value = '';
+      document.getElementById('practiceResult').classList.add('hidden');
+
+      const stdAnswer = document.getElementById('practiceStandardAnswer');
+      if (q.type === 'list') {
+        stdAnswer.innerHTML = `<ul class="list-disc pl-5 space-y-1">${q.items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+      } else if (q.type === 'subsections') {
+        stdAnswer.innerHTML = q.subsections.map(s => `<p class="font-bold text-blue-600 mt-1">${s.label}</p><ul class="list-disc pl-5 space-y-1">${s.items.map(i => `<li>${i}</li>`).join('')}</ul>`).join('');
+      } else if (q.type.startsWith('chart')) {
+        stdAnswer.innerHTML = `<p class="italic text-slate-600">Đối với câu biểu đồ, kiểm tra xem bạn đã nhớ đúng các mốc số liệu (2010, 2015, 2020, 2024) và thứ tự tăng/giảm hay chưa.</p>`;
+      }
+    }
+
+    function checkPracticeAnswer() {
+      document.getElementById('practiceResult').classList.remove('hidden');
+    }
+
+    function renderFlashcardMode(q) {
+      const card = document.getElementById('flashcard');
+      card.classList.remove('rotate-y-180');
+
+      document.getElementById('fcNum').innerText = `Câu ${q.id}`;
+      document.getElementById('fcQuestion').innerText = q.title;
+
+      const fcAns = document.getElementById('fcAnswer');
+      if (q.type === 'list') {
+        fcAns.innerHTML = `<ul class="space-y-2">${q.items.map(i => `<li class="flex items-start gap-2"><i class="fa-solid fa-caret-right text-blue-400 mt-1"></i><span>${i}</span></li>`).join('')}</ul>`;
+      } else if (q.type === 'subsections') {
+        fcAns.innerHTML = q.subsections.map(s => `<p class="font-bold text-blue-400 mt-1">${s.label}</p><ul class="space-y-1 pl-2">${s.items.map(i => `<li>• ${i}</li>`).join('')}</ul>`).join('');
+      } else if (q.type === 'chart-stacked') {
+        fcAns.innerHTML = `
+          <p class="font-semibold text-blue-300">Số liệu Lúa / Cây khác / Tổng (Triệu ha):</p>
+          <p>• 2010: 7.5 + 1.1 = <b>8.6</b></p>
+          <p>• 2015: 7.8 + 1.2 = <b>9.0</b></p>
+          <p>• 2020: 7.3 + 0.9 = <b>8.2</b></p>
+          <p>• 2024: 7.1 + 0.9 = <b>8.0</b></p>
+        `;
+      } else if (q.type === 'chart-grouped') {
+        fcAns.innerHTML = `
+          <p class="font-semibold text-blue-300">Tỉ lệ Thất nghiệp / Thiếu việc làm (%):</p>
+          <p>• 2010: 2.88% / 3.57%</p>
+          <p>• 2015: 2.33% / 1.89%</p>
+          <p>• 2020: 2.48% / 2.52%</p>
+          <p>• 2024: 2.24% / 1.85%</p>
+        `;
+      }
+    }
+
+    function flipCard() {
+      document.getElementById('flashcard').classList.toggle('rotate-y-180');
+    }
+
+    function nextQuestion() {
+      if (currentIndex < questionsData.length - 1) {
+        selectQuestion(currentIndex + 1);
+      } else {
+        selectQuestion(0);
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        selectQuestion(currentIndex - 1);
+      } else {
+        selectQuestion(questionsData.length - 1);
+      }
+    }
+
+    // Keyboard Arrow Navigation Support
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+      if (e.key === 'ArrowRight') nextQuestion();
+      if (e.key === 'ArrowLeft') prevQuestion();
+      if (e.key === ' ' && currentMode === 'flashcard') {
+        e.preventDefault();
+        flipCard();
+      }
+    });
+
+    // Initialize
+    window.onload = function() {
+      renderNav();
+      renderCurrentQuestion();
+    };
+  </script>
 </body>
 </html>

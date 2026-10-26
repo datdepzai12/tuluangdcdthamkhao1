@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải bài tập Tự luận (Rút gọn) - Giáo dục Công dân</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #0d47a1;
+            --bg: #f0f4f8;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            padding: 20px;
+        }
+        .container { max-width: 880px; margin: 0 auto; }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 32px 24px;
+            border-radius: 18px;
+            margin-bottom: 24px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        header h1 { font-size: 1.7rem; font-weight: 700; margin-bottom: 6px; }
+        header p { opacity: 0.9; font-size: 1rem; }
+        .nav {
+            display: flex; flex-wrap: wrap; gap: 8px;
+            justify-content: center; margin-bottom: 24px;
+        }
+        .nav a {
+            background: white; color: var(--primary);
+            padding: 8px 16px; border-radius: 50px;
+            text-decoration: none; font-weight: 500; font-size: 0.9rem;
+            box-shadow: var(--shadow); transition: all 0.2s;
+        }
+        .nav a:hover { background: var(--primary); color: white; }
+        .question-card {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 22px 24px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--primary);
+        }
+        .question-card h2 {
+            color: var(--primary-dark);
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .badge {
+            display: inline-block;
+            background: var(--primary); color: white;
+            font-size: 0.75rem; padding: 2px 9px;
+            border-radius: 20px; font-weight: 600;
+        }
+        .de-bai {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            font-size: 0.97rem;
+        }
+        .answer {
+            background: #f0fdf4;
+            border-radius: 10px;
+            padding: 16px 18px;
+            border: 1px solid #bbf7d0;
+        }
+        .answer h3 {
+            color: #15803d;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+        .answer p, .answer li { margin-bottom: 8px; font-size: 0.98rem; }
+        .answer ul { padding-left: 20px; margin-bottom: 8px; }
+        .key {
+            background: #fef9c3;
+            border-left: 4px solid #eab308;
+            padding: 10px 14px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 12px;
+            font-size: 0.93rem;
+            color: #854d0e;
+            font-weight: 500;
+        }
+        footer {
+            text-align: center;
+            padding: 24px 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            header { padding: 24px 16px; }
+            header h1 { font-size: 1.4rem; }
+            .question-card { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📘 Giải Tự luận (Rút gọn)</h1>
+            <p>Dễ học thuộc – Vẫn đủ ý để đi thi</p>
+        </header>
+
+        <nav class="nav">
+            <a href="#cau1">Câu 1</a>
+            <a href="#cau2">Câu 2</a>
+            <a href="#cau3">Câu 3</a>
+            <a href="#cau4">Câu 4</a>
+            <a href="#cau5">Câu 5</a>
+        </nav>
+
+        <!-- CÂU 1 -->
+        <section id="cau1" class="question-card">
+            <h2><span class="badge">Câu 1</span> Tuổi ăn chơi & học tập</h2>
+            <div class="de-bai">
+                Học sinh THCS đang ở tuổi ăn, tuổi chơi thì nên biết tranh thủ ăn chơi, hưởng thụ. Còn việc học hành, làm việc, cống hiến là việc làm suốt đời.<br>
+                <em>Em có tán thành quan điểm trên không? Vì sao?</em>
+            </div>
+            <div class="answer">
+                <h3>✅ Bài làm ngắn</h3>
+                <p><strong>Em không tán thành quan điểm trên.</strong></p>
+                <ul>
+                    <li>Học sinh THCS đang ở độ tuổi vàng để học tập, rèn luyện tri thức và nhân cách.</li>
+                    <li>Nếu chỉ tranh thủ ăn chơi sẽ dễ lười học, ảnh hưởng đến tương lai.</li>
+                    <li>Học hành, rèn luyện phải được thực hiện ngay từ khi còn ngồi trên ghế nhà trường, không thể chờ đến khi trưởng thành.</li>
+                </ul>
+                <p>→ Cần cân bằng giữa học và chơi lành mạnh, lấy học tập làm nhiệm vụ chính.</p>
+                <div class="key">🔑 Ý chính: Không tán thành – Tuổi học là tuổi vàng – Phải học ngay từ bây giờ.</div>
+            </div>
+        </section>
+
+        <!-- CÂU 2 -->
+        <section id="cau2" class="question-card">
+            <h2><span class="badge">Câu 2</span> Nhân ái & ích kỷ</h2>
+            <div class="de-bai">
+                Có ý kiến cho rằng, hiện nay bên cạnh những học sinh, thanh niên có tấm lòng nhân ái thì vẫn còn những cá nhân sống ích kỷ, ham chơi, chỉ biết hưởng thụ, thờ ơ với cộng đồng.<br>
+                <strong>a.</strong> Nêu quan điểm của em.<br>
+                <strong>b.</strong> Lấy ví dụ chứng minh.
+            </div>
+            <div class="answer">
+                <h3>✅ Bài làm ngắn</h3>
+                <p><strong>a.</strong> Em <strong>tán thành</strong> ý kiến trên vì nó phản ánh đúng thực tế xã hội. Bên cạnh nhiều bạn trẻ tốt vẫn còn một số người sống ích kỷ, thiếu trách nhiệm.</p>
+                <p><strong>b. Ví dụ:</strong></p>
+                <ul>
+                    <li><strong>Tích cực:</strong> Nhiều học sinh tham gia tình nguyện, quyên góp ủng hộ đồng bào bị thiên tai.</li>
+                    <li><strong>Tiêu cực:</strong> Một số bạn chỉ chơi game, xả rác bừa bãi, thờ ơ khi thấy người cần giúp đỡ.</li>
+                </ul>
+                <div class="key">🔑 Ý chính: Tán thành – Có cả tốt lẫn xấu – Ví dụ rõ ràng 1 tích cực + 1 tiêu cực.</div>
+            </div>
+        </section>
+
+        <!-- CÂU 3 -->
+        <section id="cau3" class="question-card">
+            <h2><span class="badge">Câu 3</span> Bạn A day dứt với ông nội</h2>
+            <div class="de-bai">
+                A day dứt vì đã mắc lỗi với ông nội. Ông mất, A càng ân hận, thường xuyên khóc, mất ngủ, buồn rầu, không muốn nói chuyện với mọi người.<br>
+                <strong>a.</strong> Nhận xét về hành động của A.<br>
+                <strong>b.</strong> Nếu là bạn của A, em sẽ khuyên gì?
+            </div>
+            <div class="answer">
+                <h3>✅ Bài làm ngắn</h3>
+                <p><strong>a.</strong> A biết nhận lỗi và biết trân trọng ông nội là điều tốt. Tuy nhiên, A để nỗi day dứt ảnh hưởng quá mức đến sức khỏe và tinh thần là không nên.</p>
+                <p><strong>b. Khuyên A:</strong></p>
+                <ul>
+                    <li>Chấp nhận sai lầm và rút kinh nghiệm.</li>
+                    <li>Chuyển nỗi day dứt thành động lực sống tốt hơn, học giỏi hơn để tưởng nhớ ông.</li>
+                    <li>Tâm sự với bố mẹ, bạn bè để được chia sẻ.</li>
+                </ul>
+                <div class="key">🔑 Ý chính: Biết nhận lỗi là tốt – Không nên day dứt quá mức – Sống tốt hơn chính là cách xin lỗi.</div>
+            </div>
+        </section>
+
+        <!-- CÂU 4 -->
+        <section id="cau4" class="question-card">
+            <h2><span class="badge">Câu 4</span> Bạn V quên việc nhà</h2>
+            <div class="de-bai">
+                Bố mẹ giao V dọn nhà mỗi ngày nhưng V thường mải chơi quên. Một lần có khách, V thấy bố mẹ rất ngượng vì nhà bừa bộn.<br>
+                <em>Nếu em là bố mẹ của V, em sẽ ứng xử thế nào?</em>
+            </div>
+            <div class="answer">
+                <h3>✅ Bài làm ngắn</h3>
+                <ul>
+                    <li>Không mắng trước mặt khách.</li>
+                    <li>Sau khi khách về, nói chuyện nhẹ nhàng, chỉ ra hậu quả (bố mẹ bị ngượng).</li>
+                    <li>Giải thích việc nhà là trách nhiệm chung của mọi thành viên.</li>
+                    <li>Cùng V lập thời gian biểu rõ ràng và động viên, khen ngợi khi V làm tốt.</li>
+                </ul>
+                <div class="key">🔑 Ý chính: Bình tĩnh – Chỉ rõ hậu quả – Giao việc có kế hoạch – Khen khi làm tốt.</div>
+            </div>
+        </section>
+
+        <!-- CÂU 5 -->
+        <section id="cau5" class="question-card">
+            <h2><span class="badge">Câu 5</span> Đồng ý / Không đồng ý quan điểm</h2>
+            <div class="de-bai">
+                Em đồng ý quan điểm nào và không đồng ý quan điểm nào? Vì sao?<br><br>
+                <strong>A.</strong> Khi có nhiều cá nhân tham gia hoạt động chung thì đó là hoạt động cộng đồng.<br>
+                <strong>B.</strong> Tích cực tham gia hoạt động cộng đồng giúp hoàn thiện bản thân và lan tỏa giá trị tốt đẹp.<br>
+                <strong>C.</strong> Chỉ những người có điều kiện kinh tế mới tham gia được hoạt động cộng đồng.<br>
+                <strong>D.</strong> Học sinh không chỉ tích cực tham gia mà còn cần động viên người thân, bạn bè cùng tham gia.
+            </div>
+            <div class="answer">
+                <h3>✅ Bài làm ngắn</h3>
+                <p><strong>Đồng ý: B và D</strong><br>
+                <strong>Không đồng ý: A và C</strong></p>
+                <ul>
+                    <li><strong>A – Sai:</strong> Không phải cứ đông người là hoạt động cộng đồng. Phải có mục đích vì lợi ích chung.</li>
+                    <li><strong>B – Đúng:</strong> Tham gia giúp rèn luyện bản thân và lan tỏa điều tốt.</li>
+                    <li><strong>C – Sai:</strong> Ai cũng có thể tham gia (nhặt rác, giúp đỡ người khác…), không cần điều kiện kinh tế.</li>
+                    <li><strong>D – Đúng:</strong> Cần lan tỏa tinh thần tích cực đến mọi người xung quanh.</li>
+                </ul>
+                <div class="key">🔑 Ý chính: Đồng ý B, D – Không đồng ý A, C. Nhớ lý do ngắn gọn.</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Phiên bản rút gọn – Dễ học thuộc để đi thi</p>
+            <p style="margin-top:4px; font-size:0.85rem;">Vẫn đủ ý, chỉ cần diễn đạt lại bằng lời của mình là được.</p>
+        </footer>
+    </div>
+</body>
+</html>
